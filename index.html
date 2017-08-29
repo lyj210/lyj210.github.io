@@ -61,6 +61,67 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/29/笔记/" class="article-date">
+  <time datetime="2017-08-29T07:23:41.000Z" itemprop="datePublished">2017-08-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/29/笔记/">笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="lnmp-thinkphp5-5-0-10-git"><a href="#lnmp-thinkphp5-5-0-10-git" class="headerlink" title="lnmp+thinkphp5(5.0.10)+git"></a>lnmp+thinkphp5(5.0.10)+git</h1><h4 id="lnmp安装"><a href="#lnmp安装" class="headerlink" title="lnmp安装"></a>lnmp安装</h4><blockquote>
+<p>lnmp安装教程： <a href="https://lnmp.org/install.html" target="_blank" rel="external">https://lnmp.org/install.html</a></p>
+<p>lnmp相关软件目录及文件位置： <a href="https://lnmp.org/install.html" target="_blank" rel="external">https://lnmp.org/install.html</a></p>
+</blockquote>
+<h4 id="安装完lnmp之后需要配置一下nginx"><a href="#安装完lnmp之后需要配置一下nginx" class="headerlink" title="安装完lnmp之后需要配置一下nginx"></a>安装完lnmp之后需要配置一下nginx</h4><ol>
+<li><p>配置nginx.conf</p>
+<p>一般默认就行</p>
+</li>
+<li><p>配置vhost</p>
+<p>为了支持pathinfo改为如下配置</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">server</div><div class="line">    &#123;</div><div class="line">        <span class="attribute">listen</span> <span class="number">80</span>;</div><div class="line">        <span class="comment">#listen [::]:80;</span></div><div class="line">        <span class="attribute">server_name</span> www.xxx.com;</div><div class="line">        <span class="attribute">index</span> index.php index.html index.htm;</div><div class="line">        <span class="attribute">root</span>  /home/wwwroot/www.xxx.com/public;  <span class="comment">#因为thinkphp5的入口文件是在public/下的</span></div><div class="line">        </div><div class="line">        <span class="attribute">error_page</span>   <span class="number">403</span> <span class="number">404</span> <span class="number">500</span>  = /<span class="number">404</span>.html;</div><div class="line"></div><div class="line">        <span class="comment"># Deny access to PHP files in specific directory</span></div><div class="line">        <span class="comment">#location ~ /(wp-content|uploads|wp-includes|images)/.*\.php$ &#123; deny all; &#125;</span></div><div class="line"></div><div class="line">  		<span class="comment">#引入下面这个就能支持pathinfo 不能隐藏入口文件但是为了支持www.xxx.com/user/index/login这个格式采取下面两个locatin形式进行替换</span></div><div class="line">        <span class="comment">#include enable-php-pathinfo.conf;  </span></div><div class="line"></div><div class="line">        <span class="attribute">location</span> / &#123;</div><div class="line">            <span class="attribute">index</span>  index.html index.htm index.php; </div><div class="line">            <span class="comment">#autoindex  on;</span></div><div class="line">            <span class="comment">#转发规则,支持url重写 主要是为了隐藏入口文件 </span></div><div class="line">            <span class="attribute">if</span> (!-e <span class="variable">$request_filename</span>) &#123;</div><div class="line">                <span class="attribute">rewrite</span> <span class="regexp"> ^(.*)$</span>  /index.php?s=<span class="variable">$1</span>  <span class="literal">last</span>;</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="attribute">location</span> <span class="regexp">~ [^/]\.php(/|$)</span></div><div class="line"><span class="regexp"></span>        &#123;</div><div class="line">            <span class="attribute">fastcgi_pass</span>  unix:/tmp/php-cgi.sock; 	</div><div class="line">            <span class="attribute">fastcgi_index</span> index.php;				</div><div class="line">            <span class="attribute">include</span> fastcgi_params;					</div><div class="line">            <span class="attribute">include</span> pathinfo.conf;					</div><div class="line">            <span class="attribute">fastcgi_param</span>  SCRIPT_FILENAME    <span class="variable">$document_root</span><span class="variable">$fastcgi_script_name</span>;</div><div class="line">            <span class="attribute">fastcgi_param</span> PHP_ADMIN_VALUE <span class="string">"open_basedir=/home/wwwroot/www.xxx.com/:/tmp/:/proc/"</span>; </div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="attribute">location</span> <span class="regexp">~ .*\.(gif|jpg|jpeg|png|bmp|swf)$</span></div><div class="line"><span class="regexp"></span>        &#123;</div><div class="line">            <span class="attribute">expires</span>      <span class="number">30d</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="attribute">location</span> <span class="regexp">~ .*\.(js|css)?$</span></div><div class="line"><span class="regexp"></span>        &#123;</div><div class="line">            <span class="attribute">expires</span>      <span class="number">12h</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="attribute">location</span> <span class="regexp">~ /.well-known</span> &#123;</div><div class="line">            <span class="attribute">allow</span> all;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="attribute">location</span> <span class="regexp">~ /\.</span></div><div class="line"><span class="regexp"></span>        &#123;</div><div class="line">            <span class="attribute">deny</span> all;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="attribute">access_log</span>  /home/wwwlogs/www.xxx.com.log;</div><div class="line">        <span class="attribute">error_log</span>   /home/wwwlogs/www.xxx.com.<span class="literal">error</span>.log;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>​</p>
+<p>关于上面的配置参考以下几篇文章</p>
+<p><a href="http://blog.jjonline.cn/linux/218.html" target="_blank" rel="external">nginx配置详细的介绍</a> </p>
+<p><a href="https://www.kancloud.cn/manual/thinkphp5/177576" target="_blank" rel="external">tp5 URL重写</a></p>
+<p><a href="https://www.kancloud.cn/manual/thinkphp5/336757" target="_blank" rel="external">tp5部署linux主机环境</a></p>
+<p>nginx的配置这样基本就ok了</p>
+</li>
+</ol>
+<h4 id="配置php-ini"><a href="#配置php-ini" class="headerlink" title="配置php.ini"></a>配置php.ini</h4><p>因为tp5框架有一个函数scandir被禁用所以修改php.ini文件</p>
+<p>找到disable_functions这一行代码删除scandir</p>
+<h4 id="通过以上的配置tp5框架基本能跑起来了，但是会报没有写入runtime权限所以需要进入项目添加权限-如果没有runtime先mkdir-runtime-chmod-777-runtime"><a href="#通过以上的配置tp5框架基本能跑起来了，但是会报没有写入runtime权限所以需要进入项目添加权限-如果没有runtime先mkdir-runtime-chmod-777-runtime" class="headerlink" title="通过以上的配置tp5框架基本能跑起来了，但是会报没有写入runtime权限所以需要进入项目添加权限 (如果没有runtime先mkdir runtime)  chmod 777 runtime"></a>通过以上的配置tp5框架基本能跑起来了，但是会报没有写入runtime权限所以需要进入项目添加权限 (如果没有runtime先mkdir runtime)  chmod 777 runtime</h4><hr>
+<h4 id="git配置"><a href="#git配置" class="headerlink" title="git配置"></a>git配置</h4><p>为什么要用git?当然是方便管理啊</p>
+<p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000" target="_blank" rel="external">搭建git服务器</a></p>
+<p>主要参考廖大神做的，搭建完之后，本地和服务器上都git clone一下</p>
+<h6 id="提醒：最好不要把配置文件之类的都传到git上"><a href="#提醒：最好不要把配置文件之类的都传到git上" class="headerlink" title="提醒：最好不要把配置文件之类的都传到git上"></a>提醒：最好不要把配置文件之类的都传到git上</h6><h5 id="ok-配置完成，可以快乐的玩耍了"><a href="#ok-配置完成，可以快乐的玩耍了" class="headerlink" title="ok~  配置完成，可以快乐的玩耍了~~~"></a>ok~  配置完成，可以快乐的玩耍了~~~</h5>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/29/笔记/" data-id="cj6xa3tls00055gcnpqzj8cdq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-测试ss" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/08/29/测试ss/" class="article-date">
@@ -87,7 +148,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/29/测试ss/" data-id="cj6xa2dw400044xcnld991je8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/29/测试ss/" data-id="cj6xa3tlq00045gcnv0w7zq86" class="article-share-link">Share</a>
       
       
     </footer>
@@ -123,7 +184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/29/测试/" data-id="cj6xa2dw300034xcnz3bci3mx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/29/测试/" data-id="cj6xa3tlp00035gcnpstjl8ci" class="article-share-link">Share</a>
       
       
     </footer>
@@ -159,7 +220,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/29/post-name/" data-id="cj6xa2dvz00014xcn1732sfgq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/29/post-name/" data-id="cj6xa3tlo00025gcnd2u8p0zq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -195,7 +256,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/28/colin-s-hexo/" data-id="cj6xa2dvu00004xcnxk7wwkyz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/28/colin-s-hexo/" data-id="cj6xa3tlm00015gcnuv94ovjr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -240,7 +301,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/28/hello-world/" data-id="cj6xa2dw100024xcn2j7ptew8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/28/hello-world/" data-id="cj6xa3tlh00005gcn14bfho10" class="article-share-link">Share</a>
       
       
     </footer>
@@ -280,6 +341,10 @@
       <ul>
         
           <li>
+            <a href="/2017/08/29/笔记/">笔记</a>
+          </li>
+        
+          <li>
             <a href="/2017/08/29/测试ss/">测试ss</a>
           </li>
         
@@ -293,10 +358,6 @@
         
           <li>
             <a href="/2017/08/28/colin-s-hexo/">colin&#39;s hexo</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/28/hello-world/">Hello World</a>
           </li>
         
       </ul>
