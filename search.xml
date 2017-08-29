@@ -3,6 +3,14 @@
   
     
     <entry>
+      <title><![CDATA[post name]]></title>
+      <url>/2017/08/29/post-name/</url>
+      <content type="html"></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[colin's hexo]]></title>
       <url>/2017/08/28/colin-s-hexo/</url>
       <content type="html"></content>
