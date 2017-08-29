@@ -3,7 +3,7 @@
   
     
     <entry>
-      <title><![CDATA[笔记]]></title>
+      <title><![CDATA[lnmp+thinkphp5笔记]]></title>
       <url>/2017/08/29/%E7%AC%94%E8%AE%B0/</url>
       <content type="html"><![CDATA[<h1 id="lnmp-thinkphp5-5-0-10-git"><a href="#lnmp-thinkphp5-5-0-10-git" class="headerlink" title="lnmp+thinkphp5(5.0.10)+git"></a>lnmp+thinkphp5(5.0.10)+git</h1><h4 id="lnmp安装"><a href="#lnmp安装" class="headerlink" title="lnmp安装"></a>lnmp安装</h4><blockquote>
 <p>lnmp安装教程： <a href="https://lnmp.org/install.html" target="_blank" rel="external">https://lnmp.org/install.html</a></p>
@@ -32,6 +32,12 @@
 <p>主要参考廖大神做的，搭建完之后，本地和服务器上都git clone一下</p>
 <h6 id="提醒：最好不要把配置文件之类的都传到git上"><a href="#提醒：最好不要把配置文件之类的都传到git上" class="headerlink" title="提醒：最好不要把配置文件之类的都传到git上"></a>提醒：最好不要把配置文件之类的都传到git上</h6><h5 id="ok-配置完成，可以快乐的玩耍了"><a href="#ok-配置完成，可以快乐的玩耍了" class="headerlink" title="ok~  配置完成，可以快乐的玩耍了~~~"></a>ok~  配置完成，可以快乐的玩耍了~~~</h5>]]></content>
       
+        <categories>
+            
+            <category> 运维 </category>
+            
+        </categories>
+        
         
     </entry>
     

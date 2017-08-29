@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-08-29T07:35:54.000Z</updated>
+  <updated>2017-08-29T09:14:16.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>笔记</title>
+    <title>lnmp+thinkphp5笔记</title>
     <link href="http://yoursite.com/2017/08/29/%E7%AC%94%E8%AE%B0/"/>
     <id>http://yoursite.com/2017/08/29/笔记/</id>
     <published>2017-08-29T07:23:41.000Z</published>
-    <updated>2017-08-29T07:35:54.000Z</updated>
+    <updated>2017-08-29T09:14:16.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="lnmp-thinkphp5-5-0-10-git"><a href="#lnmp-thinkphp5-5-0-10-git" class="headerlink" title="lnmp+thinkphp5(5.0.10)+git"></a>lnmp+thinkphp5(5.0.10)+git</h1><h4 id="lnmp安装"><a href="#lnmp安装" class="headerlink" title="lnmp安装"></a>lnmp安装</h4><blockquote>
 <p>lnmp安装教程： <a href="https://lnmp.org/install.html" target="_blank" rel="external">https://lnmp.org/install.html</a></p>
@@ -54,6 +54,8 @@
       &lt;h1 id=&quot;lnmp-thinkphp5-5-0-10-git&quot;&gt;&lt;a href=&quot;#lnmp-thinkphp5-5-0-10-git&quot; class=&quot;headerlink&quot; title=&quot;lnmp+thinkphp5(5.0.10)+git&quot;&gt;&lt;/a&gt;lnmp+think
     
     </summary>
+    
+      <category term="运维" scheme="http://yoursite.com/categories/%E8%BF%90%E7%BB%B4/"/>
     
     
   </entry>
